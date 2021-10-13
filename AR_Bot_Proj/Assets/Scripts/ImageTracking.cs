@@ -7,23 +7,24 @@ using UnityEngine.XR.ARFoundation;
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] placeablePrefabs;
+    //[SerializeField]
+    //private GameObject[] placeablePrefabs;
 
-    private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
+    //private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
+    private Dictionary<string, Vector3> markerPositions = new Dictionary<string, Vector3>();
     private ARTrackedImageManager trackedImageManager;
 
     private void Awake()
     {
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
 
-        foreach(GameObject prefab in placeablePrefabs)
-        {
-            GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-            newPrefab.name = prefab.name;
-            newPrefab.SetActive(false);
-            spawnedPrefabs.Add(prefab.name, newPrefab);
-        }
+        //foreach(GameObject prefab in placeablePrefabs)
+        //{
+        //    GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+        //    newPrefab.name = prefab.name;
+        //    newPrefab.SetActive(false);
+        //    spawnedPrefabs.Add(prefab.name, newPrefab);
+        //}
     }
 
     private void OnEnable()
@@ -50,7 +51,7 @@ public class ImageTracking : MonoBehaviour
 
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
-            spawnedPrefabs[trackedImage.name].SetActive(false);
+            //spawnedPrefabs[trackedImage.name].SetActive(false);
         }
     }
 
@@ -59,17 +60,17 @@ public class ImageTracking : MonoBehaviour
         string name = trackedImage.referenceImage.name;
         Vector3 position = trackedImage.transform.position;
 
-        GameObject prefab = spawnedPrefabs[name];
-        prefab.transform.position = position;
-        prefab.SetActive(true);
+        //GameObject prefab = spawnedPrefabs[name];
+        //prefab.transform.position = position;
+        //prefab.SetActive(true);
 
-        foreach(GameObject go in spawnedPrefabs.Values)
-        {
-            if(go.name != name)
-            {
-                go.SetActive(false);
-            }
-        }
+        //foreach(GameObject go in spawnedPrefabs.Values)
+        //{
+        //    if(go.name != name)
+        //    {
+        //        go.SetActive(false);
+        //    }
+        //}
     }
 }
 
