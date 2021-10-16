@@ -7,10 +7,10 @@ using UnityEngine.XR.ARFoundation;
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class ImageTracking : MonoBehaviour
 {
-    //[SerializeField]
-    //private GameObject[] placeablePrefabs;
+    [SerializeField]
+    private GameObject placeablePrefab;
 
-    //private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
+    private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     private Dictionary<string, Vector3> markerPositions = new Dictionary<string, Vector3>();
     private ARTrackedImageManager trackedImageManager;
 
@@ -18,13 +18,14 @@ public class ImageTracking : MonoBehaviour
     {
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
 
-        //foreach(GameObject prefab in placeablePrefabs)
-        //{
-        //    GameObject newPrefab = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-        //    newPrefab.name = prefab.name;
-        //    newPrefab.SetActive(false);
-        //    spawnedPrefabs.Add(prefab.name, newPrefab);
-        //}
+        for(int i = 1; i <= 8; i++)
+        {
+            markerPositions.Add("marker" + i, new Vector3(0.0f, 0.0f, 0.0f));
+
+            GameObject newPrefab = Instantiate(placeablePrefab, Vector3.zero, Quaternion.identity);
+            newPrefab.SetActive(false);
+            spawnedPrefabs.Add("marker" + i, newPrefab);
+        }
     }
 
     private void OnEnable()
@@ -51,7 +52,9 @@ public class ImageTracking : MonoBehaviour
 
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
-            //spawnedPrefabs[trackedImage.name].SetActive(false);
+            string name = trackedImage.referenceImage.name;
+            markerPositions[name] = new Vector3(0.0f, 0.0f, 0.0f);
+            spawnedPrefabs[name].SetActive(false);
         }
     }
 
@@ -60,9 +63,11 @@ public class ImageTracking : MonoBehaviour
         string name = trackedImage.referenceImage.name;
         Vector3 position = trackedImage.transform.position;
 
-        //GameObject prefab = spawnedPrefabs[name];
-        //prefab.transform.position = position;
-        //prefab.SetActive(true);
+        markerPositions[name] = position;
+
+        GameObject prefab = spawnedPrefabs[name];
+        prefab.transform.position = position;
+        prefab.SetActive(true);
 
         //foreach(GameObject go in spawnedPrefabs.Values)
         //{
@@ -72,6 +77,7 @@ public class ImageTracking : MonoBehaviour
         //    }
         //}
     }
+
 }
 
 
