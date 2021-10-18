@@ -22,7 +22,8 @@ public class ImageTracking : MonoBehaviour
         {
             markerPositions.Add("marker" + i, new Vector3(0.0f, 0.0f, 0.0f));
 
-            GameObject newPrefab = Instantiate(placeablePrefab, Vector3.zero, Quaternion.identity);
+            GameObject newPrefab = Instantiate(placeablePrefab, Vector3.zero, Quaternion.Euler(new Vector3(-90, 0, 0)));
+            newPrefab.name = "marker" + i;
             newPrefab.SetActive(false);
             spawnedPrefabs.Add("marker" + i, newPrefab);
         }
@@ -52,7 +53,7 @@ public class ImageTracking : MonoBehaviour
 
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
-            string name = trackedImage.referenceImage.name;
+            string name = trackedImage.name;
             markerPositions[name] = new Vector3(0.0f, 0.0f, 0.0f);
             spawnedPrefabs[name].SetActive(false);
         }
@@ -69,9 +70,9 @@ public class ImageTracking : MonoBehaviour
         prefab.transform.position = position;
         prefab.SetActive(true);
 
-        //foreach(GameObject go in spawnedPrefabs.Values)
+        //foreach (GameObject go in spawnedPrefabs.Values)
         //{
-        //    if(go.name != name)
+        //    if (go.name != name)
         //    {
         //        go.SetActive(false);
         //    }
