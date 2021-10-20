@@ -11,8 +11,10 @@ public class ImageTracking : MonoBehaviour
     private GameObject placeablePrefab;
 
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
-    private Dictionary<string, Vector3> markerPositions = new Dictionary<string, Vector3>();
+    private Dictionary<string, int> markerOrder = new Dictionary<string, int>();
     private ARTrackedImageManager trackedImageManager;
+
+    private int counter;
 
     private void Awake()
     {
@@ -20,13 +22,15 @@ public class ImageTracking : MonoBehaviour
 
         for(int i = 1; i <= 8; i++)
         {
-            markerPositions.Add("marker" + i, new Vector3(0.0f, 0.0f, 0.0f));
+            markerOrder.Add("marker" + i, -1);
 
             GameObject newPrefab = Instantiate(placeablePrefab, Vector3.zero, Quaternion.Euler(new Vector3(-90, 0, 0)));
             newPrefab.name = "marker" + i;
             newPrefab.SetActive(false);
             spawnedPrefabs.Add("marker" + i, newPrefab);
         }
+
+        counter = 0;
     }
 
     private void OnEnable()
@@ -54,7 +58,6 @@ public class ImageTracking : MonoBehaviour
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
             string name = trackedImage.name;
-            markerPositions[name] = new Vector3(0.0f, 0.0f, 0.0f);
             spawnedPrefabs[name].SetActive(false);
         }
     }
@@ -64,19 +67,15 @@ public class ImageTracking : MonoBehaviour
         string name = trackedImage.referenceImage.name;
         Vector3 position = trackedImage.transform.position;
 
-        markerPositions[name] = position;
+        if(markerOrder[name] == -1)
+        { 
+            markerOrder[name] = counter;
+            counter++;
+        }
 
         GameObject prefab = spawnedPrefabs[name];
         prefab.transform.position = position;
         prefab.SetActive(true);
-
-        //foreach (GameObject go in spawnedPrefabs.Values)
-        //{
-        //    if (go.name != name)
-        //    {
-        //        go.SetActive(false);
-        //    }
-        //}
     }
 
 }
