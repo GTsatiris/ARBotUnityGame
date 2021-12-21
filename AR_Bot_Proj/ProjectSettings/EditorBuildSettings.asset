@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ImageTrackingExample.unity
     guid: cedbab6749b695f4eac8bf7a5ff06dee
+  - enabled: 1
+    path: Assets/Scenes/MainGame.unity
+    guid: f52d9198219513346ba180673dbe2cd3
   m_configObjects:
     UnityEditor.XR.ARCore.ARCoreSettings: {fileID: 11400000, guid: 1c5065445802f02468e147a879a455b2, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 691fd715ac5a4e348897f233f2eed9d4, type: 2}

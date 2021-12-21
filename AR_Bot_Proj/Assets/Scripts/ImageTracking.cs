@@ -11,19 +11,19 @@ public class ImageTracking : MonoBehaviour
     private GameObject placeablePrefab;
 
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
-    private Dictionary<string, int> markerOrder = new Dictionary<string, int>();
+    private List<string> processedMarkers = new List<string>();
     private ARTrackedImageManager trackedImageManager;
 
     private int counter;
 
     private void Awake()
     {
+        GlobalVars.COMMANDS = new Queue<int>();
+
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
 
         for(int i = 1; i <= 8; i++)
         {
-            markerOrder.Add("marker" + i, -1);
-
             GameObject newPrefab = Instantiate(placeablePrefab, Vector3.zero, Quaternion.Euler(new Vector3(-90, 0, 0)));
             newPrefab.name = "marker" + i;
             newPrefab.SetActive(false);
@@ -67,15 +67,29 @@ public class ImageTracking : MonoBehaviour
         string name = trackedImage.referenceImage.name;
         Vector3 position = trackedImage.transform.position;
 
-        if(markerOrder[name] == -1)
-        { 
-            markerOrder[name] = counter;
-            counter++;
+        if(!processedMarkers.Contains(name))
+        {
+            processedMarkers.Add(name);
+            int command = GetCommandCode(name);
+            if(command != -1)
+                GlobalVars.COMMANDS.Enqueue(command);
         }
 
         GameObject prefab = spawnedPrefabs[name];
         prefab.transform.position = position;
         prefab.SetActive(true);
+    }
+
+    private int GetCommandCode(string marker)
+    {
+        if ((marker == "marker1") || (marker == "marker2"))
+            return 0;
+        if ((marker == "marker3") || (marker == "marker4"))
+            return 1;
+        if ((marker == "marker5") || (marker == "marker6"))
+            return 2;
+        else
+            return -1;
     }
 
 }
