@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class RobotController : MonoBehaviour
@@ -13,6 +14,11 @@ public class RobotController : MonoBehaviour
     private int currentCommand;
     private bool commandUnderway;
     private bool startCommand;
+
+    private bool forceEndgame;
+    private GameObject target;
+    private GameObject ResUI;
+
     private Animator anim;
 
     public float speed;
@@ -20,20 +26,60 @@ public class RobotController : MonoBehaviour
     void Awake()
     {
         anim = GetComponent<Animator>();
+        //FOR THE DEBUGGINGS
+        /*GlobalVars.COMMANDS = new Queue<int>();
+        GlobalVars.COMMANDS.Enqueue(0);
+        GlobalVars.COMMANDS.Enqueue(0);
+        GlobalVars.COMMANDS.Enqueue(1);
+        GlobalVars.COMMANDS.Enqueue(0);
+        GlobalVars.COMMANDS.Enqueue(0);
+        GlobalVars.COMMANDS.Enqueue(1);
+        GlobalVars.COMMANDS.Enqueue(0);
+        GlobalVars.COMMANDS.Enqueue(0);*/
         startCommand = false;
         commandUnderway = false;
+        forceEndgame = false;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        target = GameObject.FindWithTag("target");
+        ResUI = GameObject.FindWithTag("ResultUI");
+        ResUI.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (GlobalVars.CAN_EXECUTE)
-            ExecuteAlgorithm();
+        if(forceEndgame)
+        {
+            anim.SetBool("Walk_Anim", false);
+            if(Vector3.Distance(transform.position, target.transform.position) < 0.3 * GlobalVars.SCALE_FACTOR)
+            {
+                Debug.Log("WIN!!!!!");
+                ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "WIN!!";
+                ResUI.SetActive(true);
+            }
+            else
+            {
+                Debug.Log("LOUTSOS");
+                ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "TRY AGAIN!!";
+                ResUI.SetActive(true);
+            }
+        }
+        else
+        { 
+            if (GlobalVars.CAN_EXECUTE)
+            {
+                anim.SetBool("Walk_Anim", true);
+                ExecuteAlgorithm();
+            }
+            else
+            {
+                anim.SetBool("Walk_Anim", false);
+            }
+        }
     }
 
     private void ExecuteAlgorithm()
@@ -98,30 +144,43 @@ public class RobotController : MonoBehaviour
             }
             else
             {
-                //Debug.Log("END GAME!");
-                //TODO *************************************
+                forceEndgame = true;
             }
         }
     }
 
     private bool checkMove()
     {
-        //float dice = Random.Range(0.0f, 1.0f);
-        //Debug.Log(dice);
-        //if (dice < 0.5f)
-        //    return true;
-        //else
-        //    return false;
-        return true;
+        RaycastHit hit;
+        Vector3 raisedPoint = new Vector3(finishPos.x, finishPos.y + GlobalVars.SCALE_FACTOR * 0.2f, finishPos.z);
+        if (Physics.Raycast(raisedPoint, Vector3.down, out hit, GlobalVars.SQUARE_W * GlobalVars.SCALE_FACTOR))
+        {
+            if (hit.collider.gameObject.CompareTag("tile"))
+            {
+                return true;
+            }
+            else
+            {
+                Debug.Log("HIT, NO TILE");
+                forceEndgame = true;
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log("NO HIT");
+            forceEndgame = true;
+            return false;
+        }
     }
 
     private void initComm_0()
     {
         startPos = transform.position;
-        finishPos = startPos + (GlobalVars.BOARD_WIDTH / GlobalVars.SQUARE_W) * transform.forward;
+        finishPos = startPos + (GlobalVars.SQUARE_W * GlobalVars.SCALE_FACTOR) * transform.forward;
+
         delta = 1.0f;
 
-        //TODO anim.SetBool("Walk_Anim", true);
         canMove = checkMove();
         if (canMove)
         {
@@ -140,6 +199,7 @@ public class RobotController : MonoBehaviour
 
         delta += speed * Time.deltaTime;
     }
+
     private void initComm_2()
     {
         delta = 0.0f;
@@ -153,6 +213,7 @@ public class RobotController : MonoBehaviour
 
     private void initComm_3()
     {
+        //TODO
         return;
     }
 
@@ -187,6 +248,7 @@ public class RobotController : MonoBehaviour
         else
             return false;
     }
+
     private bool execComm_2()
     {
 

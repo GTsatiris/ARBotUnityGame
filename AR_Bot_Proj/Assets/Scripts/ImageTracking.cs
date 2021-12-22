@@ -9,12 +9,22 @@ public class ImageTracking : MonoBehaviour
 {
     [SerializeField]
     private GameObject placeablePrefab;
+    [SerializeField]
+    private GameObject levelPrefab;
+
+    private GameObject Level;
 
     private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();
     private List<string> processedMarkers = new List<string>();
     private ARTrackedImageManager trackedImageManager;
 
-    private int counter;
+    private int[] CODES_FW = { 1, 2, 7, 8, 9, 10 };
+    private int[] CODES_TL = { 3, 4 };
+    private int[] CODES_TR = { 5, 6 };
+
+    private int[] levelCodes = { 11, 12, 13 };
+
+    private const int MAX_MARKERS = 10;
 
     private void Awake()
     {
@@ -22,7 +32,7 @@ public class ImageTracking : MonoBehaviour
 
         trackedImageManager = FindObjectOfType<ARTrackedImageManager>();
 
-        for(int i = 1; i <= 8; i++)
+        for(int i = 1; i <= MAX_MARKERS; i++)
         {
             GameObject newPrefab = Instantiate(placeablePrefab, Vector3.zero, Quaternion.Euler(new Vector3(-90, 0, 0)));
             newPrefab.name = "marker" + i;
@@ -30,7 +40,10 @@ public class ImageTracking : MonoBehaviour
             spawnedPrefabs.Add("marker" + i, newPrefab);
         }
 
-        counter = 0;
+        Level = Instantiate(levelPrefab, Vector3.zero, Quaternion.Euler(new Vector3(0, 90, 0)));
+        Level.name = "marker" + levelCodes[0];
+        Level.transform.localScale = new Vector3(GlobalVars.SCALE_FACTOR, GlobalVars.SCALE_FACTOR, GlobalVars.SCALE_FACTOR);
+        Level.SetActive(false);
     }
 
     private void OnEnable()
@@ -58,7 +71,16 @@ public class ImageTracking : MonoBehaviour
         foreach (ARTrackedImage trackedImage in eventArgs.removed)
         {
             string name = trackedImage.name;
-            spawnedPrefabs[name].SetActive(false);
+            if (spawnedPrefabs.ContainsKey(name))
+                spawnedPrefabs[name].SetActive(false);
+            else
+            { 
+                foreach(int lvlCode in levelCodes)
+                {
+                    if (name == "marker" + lvlCode)
+                        Level.SetActive(false);
+                }
+            }
         }
     }
 
@@ -66,30 +88,54 @@ public class ImageTracking : MonoBehaviour
     {
         string name = trackedImage.referenceImage.name;
         Vector3 position = trackedImage.transform.position;
+        Debug.Log("MARKER " + name);
 
-        if(!processedMarkers.Contains(name))
+        if (spawnedPrefabs.ContainsKey(name))
         {
-            processedMarkers.Add(name);
-            int command = GetCommandCode(name);
-            if(command != -1)
-                GlobalVars.COMMANDS.Enqueue(command);
+            if (GlobalVars.LEVEL_VISIBLE)
+            {
+                if (!processedMarkers.Contains(name))
+                {
+                    processedMarkers.Add(name);
+                    int command = GetCommandCode(name);
+                    if (command != -1)
+                        GlobalVars.COMMANDS.Enqueue(command);
+                }
+                GameObject prefab = spawnedPrefabs[name];
+                prefab.transform.position = position;
+                prefab.SetActive(true);
+            }
         }
-
-        GameObject prefab = spawnedPrefabs[name];
-        prefab.transform.position = position;
-        prefab.SetActive(true);
+        else
+        {
+            //Level = spawnedPrefabs["marker1"];
+            Level.transform.position = position;
+            Level.SetActive(true);
+            GlobalVars.LEVEL_VISIBLE = true;
+        }
     }
 
     private int GetCommandCode(string marker)
     {
-        if ((marker == "marker1") || (marker == "marker2"))
-            return 0;
-        if ((marker == "marker3") || (marker == "marker4"))
-            return 1;
-        if ((marker == "marker5") || (marker == "marker6"))
-            return 2;
-        else
-            return -1;
+        foreach( int code in CODES_FW)
+        {
+            if (marker == "marker" + code)
+                return 0;
+        }
+
+        foreach (int code in CODES_TL)
+        {
+            if (marker == "marker" + code)
+                return 1;
+        }
+
+        foreach (int code in CODES_TR)
+        {
+            if (marker == "marker" + code)
+                return 2;
+        }
+
+        return -1;
     }
 
 }

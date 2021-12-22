@@ -95,3 +95,33 @@ MonoBehaviour:
     m_SpecifySize: 1
     m_Name: marker8
     m_Texture: {fileID: 2800000, guid: 1c7758bd85b81c14b8e9871da3b7cfce, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 5272498223939637196
+      m_GuidHigh: 4964066547004160929
+    m_SerializedTextureGuid:
+      m_GuidLow: 12210645948359519207
+      m_GuidHigh: 7327798109085774539
+    m_Size: {x: 0.085, y: 0.085}
+    m_SpecifySize: 1
+    m_Name: marker9
+    m_Texture: {fileID: 2800000, guid: 96082be7edcba974cb32d64d8e91b165, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 4899998337474914189
+      m_GuidHigh: 9944979859724660613
+    m_SerializedTextureGuid:
+      m_GuidLow: 13638219240251263097
+      m_GuidHigh: 11897356048941819083
+    m_Size: {x: 0.085, y: 0.085}
+    m_SpecifySize: 1
+    m_Name: marker10
+    m_Texture: {fileID: 2800000, guid: 00130879b024bd44cba485a74ae61ba5, type: 3}
+  - m_SerializedGuid:
+      m_GuidLow: 4853270944666547135
+      m_GuidHigh: 15101521017236497567
+    m_SerializedTextureGuid:
+      m_GuidLow: 9684016388969188266
+      m_GuidHigh: 13545475850439307881
+    m_Size: {x: 0.085, y: 0.085}
+    m_SpecifySize: 1
+    m_Name: marker11
+    m_Texture: {fileID: 2800000, guid: ff91cbaa89988664693211db8432fbbb, type: 3}

@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class UIHandlerAR : MonoBehaviour
 {
     public GameObject modalWindow;
+    public GameObject promptWindow;
 
     private void Awake()
     {
         modalWindow.SetActive(false);
+        promptWindow.SetActive(true);
     }
 
     // Start is called before the first frame update
@@ -21,7 +23,8 @@ public class UIHandlerAR : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GlobalVars.LEVEL_VISIBLE)
+            promptWindow.SetActive(false);
     }
 
     public void OnPlayButtonClick()
@@ -34,6 +37,8 @@ public class UIHandlerAR : MonoBehaviour
 
     public void OnFinalPlayButtonClick()
     {
-        SceneManager.LoadScene("MainGame");
+        //SceneManager.LoadScene("MainGame");
+        modalWindow.SetActive(false);
+        GlobalVars.CAN_EXECUTE = true;
     }
 }
