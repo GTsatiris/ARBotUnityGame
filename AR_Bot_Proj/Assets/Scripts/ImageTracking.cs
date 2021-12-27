@@ -46,6 +46,11 @@ public class ImageTracking : MonoBehaviour
         Level.SetActive(false);
     }
 
+    private void Start()
+    {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+    }
+
     private void OnEnable()
     {
         trackedImageManager.trackedImagesChanged += ImageChanged;
@@ -88,7 +93,6 @@ public class ImageTracking : MonoBehaviour
     {
         string name = trackedImage.referenceImage.name;
         Vector3 position = trackedImage.transform.position;
-        Debug.Log("MARKER " + name);
 
         if (spawnedPrefabs.ContainsKey(name))
         {

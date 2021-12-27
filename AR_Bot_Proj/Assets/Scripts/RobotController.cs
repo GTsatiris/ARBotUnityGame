@@ -10,6 +10,7 @@ public class RobotController : MonoBehaviour
     private float delta;
     private float yRotOrig;
     private bool canMove;
+    private bool succeeded;
 
     private int currentCommand;
     private bool commandUnderway;
@@ -39,6 +40,7 @@ public class RobotController : MonoBehaviour
         startCommand = false;
         commandUnderway = false;
         forceEndgame = false;
+        succeeded = false;
     }
 
     // Start is called before the first frame update
@@ -55,7 +57,8 @@ public class RobotController : MonoBehaviour
         if(forceEndgame)
         {
             anim.SetBool("Walk_Anim", false);
-            if(Vector3.Distance(transform.position, target.transform.position) < 0.3 * GlobalVars.SCALE_FACTOR)
+            //if(Vector3.Distance(transform.position, target.transform.position) < 0.3 * GlobalVars.SCALE_FACTOR)
+            if(succeeded)
             {
                 Debug.Log("WIN!!!!!");
                 ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "WIN!!";
@@ -149,7 +152,7 @@ public class RobotController : MonoBehaviour
         }
     }
 
-    private bool checkMove()
+    /*private bool checkMove()
     {
         RaycastHit hit;
         Vector3 raisedPoint = new Vector3(finishPos.x, finishPos.y + GlobalVars.SCALE_FACTOR * 0.2f, finishPos.z);
@@ -172,6 +175,42 @@ public class RobotController : MonoBehaviour
             forceEndgame = true;
             return false;
         }
+    }*/
+
+    private bool checkMove()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, GlobalVars.SQUARE_W))
+        {
+            if (hit.collider.gameObject.CompareTag("valid"))
+            {
+                finishPos = hit.collider.gameObject.transform.position;
+                Debug.Log(hit.collider.gameObject.name);
+                succeeded = false;
+                return true;
+            }
+            else if (hit.collider.gameObject.CompareTag("target"))
+            {
+                finishPos = hit.collider.gameObject.transform.position;
+                Debug.Log(hit.collider.gameObject.name);
+                succeeded = true;
+                return true;
+            }
+            else
+            {
+                Debug.Log("HIT, NO TILE");
+                forceEndgame = true;
+                succeeded = false;
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log("NO HIT");
+            forceEndgame = true;
+            succeeded = false;
+            return false;
+        }
     }
 
     private void initComm_0()
@@ -181,7 +220,9 @@ public class RobotController : MonoBehaviour
 
         delta = 1.0f;
 
+        //Responsible to validate the mode and calculate target position
         canMove = checkMove();
+
         if (canMove)
         {
             transform.position = delta * startPos + (1 - delta) * finishPos;

@@ -1887,7 +1887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeablePrefab: {fileID: 4277454751427050505, guid: b835067fb24b967448f64d3953f5833b, type: 3}
-  levelPrefab: {fileID: 1931133738920107122, guid: a7c1412ac802bf94488e1a9a46b1e5ee, type: 3}
+  levelPrefab: {fileID: 3922617410822014216, guid: b8712803c5606e34886031494fd91875, type: 3}
 --- !u!1 &2046718587
 GameObject:
   m_ObjectHideFlags: 0
