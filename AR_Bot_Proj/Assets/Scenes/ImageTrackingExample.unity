@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187492960}
   - component: {fileID: 187492959}
+  - component: {fileID: 187492961}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -216,6 +217,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &187492961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187492958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd9b9a18958e66b4bb46423fa9847908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CameraManager: {fileID: 2121262713}
 --- !u!1 &201972156
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,7 +1901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placeablePrefab: {fileID: 4277454751427050505, guid: b835067fb24b967448f64d3953f5833b, type: 3}
-  levelPrefab: {fileID: 3922617410822014216, guid: b8712803c5606e34886031494fd91875, type: 3}
+  levelPrefab: {fileID: 7047765824890523735, guid: 00c4d27f1e394d5459236cbc05dc120f, type: 3}
 --- !u!1 &2046718587
 GameObject:
   m_ObjectHideFlags: 0
@@ -2065,7 +2079,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
+  near clip plane: 0.01
   far clip plane: 20
   field of view: 60
   orthographic: 0
@@ -2114,7 +2128,7 @@ MonoBehaviour:
   m_FocusMode: -1
   m_LightEstimationMode: -1
   m_AutoFocus: 1
-  m_LightEstimation: 0
+  m_LightEstimation: -1
   m_FacingDirection: 1
 --- !u!114 &2121262714
 MonoBehaviour:

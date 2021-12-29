@@ -17,12 +17,12 @@ public class RobotController : MonoBehaviour
     private bool startCommand;
 
     private bool forceEndgame;
-    private GameObject target;
     private GameObject ResUI;
 
     private Animator anim;
 
     public float speed;
+    public GameObject Target;
 
     void Awake()
     {
@@ -46,7 +46,6 @@ public class RobotController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindWithTag("target");
         ResUI = GameObject.FindWithTag("ResultUI");
         ResUI.SetActive(false);
     }
@@ -56,31 +55,36 @@ public class RobotController : MonoBehaviour
     {
         if(forceEndgame)
         {
-            anim.SetBool("Walk_Anim", false);
+            anim.ResetTrigger("IdleToWalk");
+            anim.SetTrigger("WalkToIdle");
             //if(Vector3.Distance(transform.position, target.transform.position) < 0.3 * GlobalVars.SCALE_FACTOR)
             if(succeeded)
             {
                 Debug.Log("WIN!!!!!");
                 ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "WIN!!";
                 ResUI.SetActive(true);
+                anim.ResetTrigger("PowerOn");
+                anim.SetTrigger("PowerOff");
             }
             else
             {
                 Debug.Log("LOUTSOS");
                 ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "TRY AGAIN!!";
                 ResUI.SetActive(true);
+                anim.ResetTrigger("PowerOn");
+                anim.SetTrigger("Die");
             }
         }
         else
         { 
             if (GlobalVars.CAN_EXECUTE)
             {
-                anim.SetBool("Walk_Anim", true);
+                anim.SetTrigger("IdleToWalk");
                 ExecuteAlgorithm();
             }
             else
             {
-                anim.SetBool("Walk_Anim", false);
+                anim.SetTrigger("WalkToIdle");
             }
         }
     }
@@ -105,6 +109,7 @@ public class RobotController : MonoBehaviour
                 case 1:
                     if (startCommand)
                     {
+                        anim.SetTrigger("LeftTurn");
                         initComm_1();
                         startCommand = false;
                     }
@@ -116,6 +121,7 @@ public class RobotController : MonoBehaviour
                 case 2:
                     if (startCommand)
                     {
+                        anim.SetTrigger("RightTurn");
                         initComm_2();
                         startCommand = false;
                     }
@@ -180,7 +186,7 @@ public class RobotController : MonoBehaviour
     private bool checkMove()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, GlobalVars.SQUARE_W))
+        if (Physics.Raycast(transform.position /*+ GlobalVars.SCALE_FACTOR * transform.up*/, transform.forward, out hit, GlobalVars.SQUARE_W))
         {
             if (hit.collider.gameObject.CompareTag("valid"))
             {
@@ -199,6 +205,7 @@ public class RobotController : MonoBehaviour
             else
             {
                 Debug.Log("HIT, NO TILE");
+                Debug.Log(hit.collider.gameObject.name);
                 forceEndgame = true;
                 succeeded = false;
                 return false;
@@ -272,7 +279,11 @@ public class RobotController : MonoBehaviour
         if (delta > 0.0f)
             return true;
         else
+        {
+            if (succeeded)
+                Destroy(Target);
             return false;
+        }
     }
 
     private bool execComm_1()
