@@ -11,6 +11,7 @@ public class RobotController : MonoBehaviour
     private float yRotOrig;
     private bool canMove;
     private bool succeeded;
+    private bool wokeUp;
 
     private int currentCommand;
     private bool commandUnderway;
@@ -26,6 +27,7 @@ public class RobotController : MonoBehaviour
 
     void Awake()
     {
+        wokeUp = false;
         anim = GetComponent<Animator>();
         //FOR THE DEBUGGINGS
         /*GlobalVars.COMMANDS = new Queue<int>();
@@ -76,7 +78,13 @@ public class RobotController : MonoBehaviour
             }
         }
         else
-        { 
+        {
+            if((GlobalVars.COMMANDS.Count > 0) && !wokeUp)
+            {
+                anim.SetTrigger("PowerOn");
+                wokeUp = true;
+            }
+
             if (GlobalVars.CAN_EXECUTE)
             {
                 anim.SetTrigger("IdleToWalk");

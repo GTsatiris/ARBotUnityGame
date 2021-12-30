@@ -8,6 +8,7 @@ TagManager:
   - target
   - ResultUI
   - valid
+  - invalid
   layers:
   - Default
   - TransparentFX

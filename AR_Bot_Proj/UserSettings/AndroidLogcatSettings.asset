@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "e996e288",
         "name": "com.DefaultCompany.AR_Bot_Proj",
-        "processId": 7124,
+        "processId": 5183,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -13,18 +13,6 @@
             "name": "com.mi.android.globallauncher",
             "processId": 2646,
             "exited": false
-        },
-        {
-            "deviceId": "e996e288",
-            "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 3464,
-            "exited": true
-        },
-        {
-            "deviceId": "e996e288",
-            "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 4186,
-            "exited": true
         },
         {
             "deviceId": "e996e288",
@@ -48,6 +36,24 @@
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
             "processId": 7124,
+            "exited": true
+        },
+        {
+            "deviceId": "e996e288",
+            "name": "com.DefaultCompany.AR_Bot_Proj",
+            "processId": 31543,
+            "exited": true
+        },
+        {
+            "deviceId": "e996e288",
+            "name": "com.DefaultCompany.AR_Bot_Proj",
+            "processId": 3332,
+            "exited": false
+        },
+        {
+            "deviceId": "e996e288",
+            "name": "com.DefaultCompany.AR_Bot_Proj",
+            "processId": 5183,
             "exited": false
         }
     ],
