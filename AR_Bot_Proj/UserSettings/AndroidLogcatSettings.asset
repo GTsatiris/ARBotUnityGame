@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "e996e288",
         "name": "com.DefaultCompany.AR_Bot_Proj",
-        "processId": 5183,
+        "processId": 555,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -17,30 +17,6 @@
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 4874,
-            "exited": true
-        },
-        {
-            "deviceId": "e996e288",
-            "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 5703,
-            "exited": true
-        },
-        {
-            "deviceId": "e996e288",
-            "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 6277,
-            "exited": true
-        },
-        {
-            "deviceId": "e996e288",
-            "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 7124,
-            "exited": true
-        },
-        {
-            "deviceId": "e996e288",
-            "name": "com.DefaultCompany.AR_Bot_Proj",
             "processId": 31543,
             "exited": true
         },
@@ -48,12 +24,30 @@
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
             "processId": 3332,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
             "processId": 5183,
+            "exited": true
+        },
+        {
+            "deviceId": "e996e288",
+            "name": "com.DefaultCompany.AR_Bot_Proj",
+            "processId": 29944,
+            "exited": true
+        },
+        {
+            "deviceId": "e996e288",
+            "name": "com.DefaultCompany.AR_Bot_Proj",
+            "processId": 31714,
+            "exited": true
+        },
+        {
+            "deviceId": "e996e288",
+            "name": "com.DefaultCompany.AR_Bot_Proj",
+            "processId": 555,
             "exited": false
         }
     ],

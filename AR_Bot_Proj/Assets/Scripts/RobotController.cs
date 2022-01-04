@@ -21,6 +21,7 @@ public class RobotController : MonoBehaviour
     private GameObject ResUI;
 
     private Animator anim;
+    private RAudioManager audioManager;
 
     public float speed;
     public GameObject Target;
@@ -29,6 +30,7 @@ public class RobotController : MonoBehaviour
     {
         wokeUp = false;
         anim = GetComponent<Animator>();
+        audioManager = GetComponent<RAudioManager>();
         //FOR THE DEBUGGINGS
         /*GlobalVars.COMMANDS = new Queue<int>();
         GlobalVars.COMMANDS.Enqueue(0);
@@ -75,6 +77,8 @@ public class RobotController : MonoBehaviour
                 ResUI.SetActive(true);
                 anim.ResetTrigger("PowerOn");
                 anim.SetTrigger("Die");
+                audioManager.Stop("PowerUp");
+                audioManager.Play("Die");
             }
         }
         else
@@ -82,6 +86,7 @@ public class RobotController : MonoBehaviour
             if((GlobalVars.COMMANDS.Count > 0) && !wokeUp)
             {
                 anim.SetTrigger("PowerOn");
+                audioManager.Play("PowerUp");
                 wokeUp = true;
             }
 

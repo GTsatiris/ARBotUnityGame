@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - BasicAnimation
     - CustomAnimation
     - ImageTracking
+    - RAudioManager
     - RobotController
     - UIHandlerAR
     - UnityEngine.XR.ARFoundation.Samples.BasicLightEstimation
@@ -40,12 +41,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnimatorStateTransitionInspector
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateMachineInspector
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -85,6 +82,12 @@ ScriptsOnlyBuild:
     - Class: 65
       Script: {instanceID: 0}
     - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
@@ -148,6 +151,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 4054}
     - Class: 114
       Script: {instanceID: 4260}
+    - Class: 114
+      Script: {instanceID: 41332}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -917,6 +922,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: TouchInputModule
+  - hash:
+      serializedVersion: 2
+      Hash: 66056c2209ff8e6b238f8b056c7eb331
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RAudioManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/ImageTrackingExample.unity
