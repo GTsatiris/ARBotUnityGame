@@ -85,8 +85,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
-    - Class: 82
-      Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
     - Class: 89
@@ -118,41 +116,41 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2328}
     - Class: 114
-      Script: {instanceID: 2408}
+      Script: {instanceID: 2340}
     - Class: 114
-      Script: {instanceID: 2456}
+      Script: {instanceID: 2410}
     - Class: 114
-      Script: {instanceID: 2572}
+      Script: {instanceID: 2458}
     - Class: 114
-      Script: {instanceID: 2756}
+      Script: {instanceID: 2574}
     - Class: 114
-      Script: {instanceID: 2854}
+      Script: {instanceID: 2758}
     - Class: 114
-      Script: {instanceID: 3010}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 3014}
+      Script: {instanceID: 3012}
     - Class: 114
-      Script: {instanceID: 3100}
+      Script: {instanceID: 3018}
     - Class: 114
-      Script: {instanceID: 3228}
+      Script: {instanceID: 3104}
     - Class: 114
-      Script: {instanceID: 3414}
+      Script: {instanceID: 3232}
     - Class: 114
-      Script: {instanceID: 3602}
+      Script: {instanceID: 3418}
     - Class: 114
-      Script: {instanceID: 3644}
+      Script: {instanceID: 3606}
     - Class: 114
-      Script: {instanceID: 3788}
+      Script: {instanceID: 3648}
     - Class: 114
-      Script: {instanceID: 3944}
+      Script: {instanceID: 3792}
     - Class: 114
-      Script: {instanceID: 3982}
+      Script: {instanceID: 3948}
     - Class: 114
-      Script: {instanceID: 4054}
+      Script: {instanceID: 3986}
     - Class: 114
-      Script: {instanceID: 4260}
+      Script: {instanceID: 4058}
     - Class: 114
-      Script: {instanceID: 41332}
+      Script: {instanceID: 4264}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -346,6 +344,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.XR.ARFoundation.dll
     namespaceName: UnityEngine.XR.ARFoundation
     className: ARCameraManager
+  - hash:
+      serializedVersion: 2
+      Hash: 66056c2209ff8e6b238f8b056c7eb331
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RAudioManager
   - hash:
       serializedVersion: 2
       Hash: 290afc8da8e459e0b8dc7444bfaf5e35
@@ -552,7 +556,7 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: 9e139cc08d95c5ce8153ba39885ba693
+      Hash: afc5b93a7b192de2dcb3832fe35a5c7e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RobotController
@@ -922,12 +926,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: TouchInputModule
-  - hash:
-      serializedVersion: 2
-      Hash: 66056c2209ff8e6b238f8b056c7eb331
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: RAudioManager
   platform: 13
   scenePathNames:
   - Assets/Scenes/ImageTrackingExample.unity

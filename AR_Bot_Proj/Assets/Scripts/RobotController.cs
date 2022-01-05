@@ -12,6 +12,8 @@ public class RobotController : MonoBehaviour
     private bool canMove;
     private bool succeeded;
     private bool wokeUp;
+    private bool stopped;
+    private bool collected;
 
     private int currentCommand;
     private bool commandUnderway;
@@ -24,11 +26,12 @@ public class RobotController : MonoBehaviour
     private RAudioManager audioManager;
 
     public float speed;
-    public GameObject Target;
 
     void Awake()
     {
         wokeUp = false;
+        stopped = false;
+        collected = false;
         anim = GetComponent<Animator>();
         audioManager = GetComponent<RAudioManager>();
         //FOR THE DEBUGGINGS
@@ -57,28 +60,47 @@ public class RobotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(forceEndgame)
+        if (forceEndgame)
         {
             anim.ResetTrigger("IdleToWalk");
             anim.SetTrigger("WalkToIdle");
             //if(Vector3.Distance(transform.position, target.transform.position) < 0.3 * GlobalVars.SCALE_FACTOR)
             if(succeeded)
             {
+                if(!collected)
+                { 
+                    Destroy(GameObject.FindWithTag("Battery"));
+                    audioManager.Play("Collect");
+                    collected = true;
+                }
+
                 Debug.Log("WIN!!!!!");
-                ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "WIN!!";
+                ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "GOOD JOB!";
                 ResUI.SetActive(true);
+                StartCoroutine(HideModal());
                 anim.ResetTrigger("PowerOn");
                 anim.SetTrigger("PowerOff");
+                if (!stopped)
+                {
+                    audioManager.Stop("Engine");
+                    audioManager.Play("PowerDown");
+                    stopped = true;
+                }
             }
             else
             {
                 Debug.Log("LOUTSOS");
                 ResUI.transform.Find("Prompt").GetComponent<TMP_Text>().text = "TRY AGAIN!!";
                 ResUI.SetActive(true);
+                StartCoroutine(HideModal());
                 anim.ResetTrigger("PowerOn");
                 anim.SetTrigger("Die");
-                audioManager.Stop("PowerUp");
-                audioManager.Play("Die");
+                if(!stopped)
+                {
+                    audioManager.Stop("Engine");
+                    audioManager.Play("Die");
+                    stopped = true;
+                }
             }
         }
         else
@@ -87,6 +109,7 @@ public class RobotController : MonoBehaviour
             {
                 anim.SetTrigger("PowerOn");
                 audioManager.Play("PowerUp");
+                audioManager.Play("Engine");
                 wokeUp = true;
             }
 
@@ -123,6 +146,7 @@ public class RobotController : MonoBehaviour
                     if (startCommand)
                     {
                         anim.SetTrigger("LeftTurn");
+                        audioManager.Play("Horn");
                         initComm_1();
                         startCommand = false;
                     }
@@ -135,6 +159,7 @@ public class RobotController : MonoBehaviour
                     if (startCommand)
                     {
                         anim.SetTrigger("RightTurn");
+                        audioManager.Play("Horn");
                         initComm_2();
                         startCommand = false;
                     }
@@ -293,8 +318,6 @@ public class RobotController : MonoBehaviour
             return true;
         else
         {
-            if (succeeded)
-                Destroy(Target);
             return false;
         }
     }
@@ -334,5 +357,11 @@ public class RobotController : MonoBehaviour
     {
         //TODO
         return false;
+    }
+
+    IEnumerator HideModal()
+    {
+        yield return new WaitForSeconds(3.0f);
+        ResUI.SetActive(false);
     }
 }

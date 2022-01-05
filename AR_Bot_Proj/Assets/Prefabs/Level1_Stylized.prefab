@@ -247,11 +247,10 @@ GameObject:
   - component: {fileID: 7047765824890523834}
   - component: {fileID: 7047765824890523798}
   - component: {fileID: 7047765824890523808}
-  - component: {fileID: 7047765824890523800}
   - component: {fileID: 7047765824890523789}
   m_Layer: 0
   m_Name: Battery
-  m_TagString: target
+  m_TagString: Battery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -319,19 +318,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7047765824890523800
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7047765824890523730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.029981118, y: 0.051777396, z: 0.017862694}
-  m_Center: {x: 0, y: 0.02548707, z: 0}
 --- !u!114 &7047765824890523789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,7 +1569,7 @@ GameObject:
   - component: {fileID: 3824626047740061769}
   m_Layer: 0
   m_Name: Robot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1637,7 +1623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  Target: {fileID: 7047765824890523730}
 --- !u!114 &3824626047740061769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1652,14 +1637,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: PowerUp
-    clip: {fileID: 8300000, guid: 6f34acf490a03f34884e60b6ee3403cc, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: e76c70bf2a1eda44b81928e588fb0dd4, type: 3}
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Die
-    clip: {fileID: 8300000, guid: 8c73db8dc70ccbb4a910ce4927d07da2, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 54a09d357cf774048814efb05aff51ca, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: PowerDown
+    clip: {fileID: 8300000, guid: 4e1828c1424361d44bb198c0f3780392, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Engine
+    clip: {fileID: 8300000, guid: 49e486b08c78de445a60e11379eef484, type: 3}
+    volume: 0.4
+    pitch: 2
+    loop: 1
+    source: {fileID: 0}
+  - name: Horn
+    clip: {fileID: 8300000, guid: 016305ef1931b314795872a33dd5286d, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Collect
+    clip: {fileID: 8300000, guid: eb34b02b4da5aa842b2c4bbdaf81cde9, type: 3}
+    volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -2263,7 +2272,7 @@ GameObject:
   - component: {fileID: 388327696864113029}
   m_Layer: 0
   m_Name: Goal
-  m_TagString: target
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -2276,7 +2285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7256153187905209437}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.07372975, y: -0.2765025, z: 0.5117519}
+  m_LocalPosition: {x: 0, y: -0.2765025, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7047765824890523834}

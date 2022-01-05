@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "e996e288",
+    "m_SelectedDeviceId": "c8028c22",
     "m_SelectedPackage": {
-        "deviceId": "e996e288",
+        "deviceId": "c8028c22",
         "name": "com.DefaultCompany.AR_Bot_Proj",
-        "processId": 555,
+        "processId": 8226,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,43 +11,55 @@
         {
             "deviceId": "e996e288",
             "name": "com.mi.android.globallauncher",
-            "processId": 2646,
+            "processId": 29709,
             "exited": false
         },
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 31543,
+            "processId": 21207,
             "exited": true
         },
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 3332,
+            "processId": 22008,
             "exited": true
         },
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 5183,
+            "processId": 23144,
             "exited": true
         },
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 29944,
+            "processId": 24541,
             "exited": true
         },
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 31714,
+            "processId": 25229,
             "exited": true
         },
         {
             "deviceId": "e996e288",
             "name": "com.DefaultCompany.AR_Bot_Proj",
-            "processId": 555,
+            "processId": 26658,
+            "exited": false
+        },
+        {
+            "deviceId": "c8028c22",
+            "name": "com.android.settings",
+            "processId": 6789,
+            "exited": false
+        },
+        {
+            "deviceId": "c8028c22",
+            "name": "com.DefaultCompany.AR_Bot_Proj",
+            "processId": 8226,
             "exited": false
         }
     ],

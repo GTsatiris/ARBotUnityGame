@@ -9,6 +9,7 @@ TagManager:
   - ResultUI
   - valid
   - invalid
+  - Battery
   layers:
   - Default
   - TransparentFX
